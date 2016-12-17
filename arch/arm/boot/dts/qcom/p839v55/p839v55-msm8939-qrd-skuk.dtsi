@@ -10,7 +10,7 @@
  * GNU General Public License for more details.
  */
 
-#include "piccolo-msm8939-qrd.dtsi"
+#include "p839v55-msm8939-qrd.dtsi"
 
 &soc {
     i2c_1: i2c@78b5000 {

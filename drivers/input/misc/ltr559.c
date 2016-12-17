@@ -39,7 +39,7 @@
 #include <linux/of_gpio.h>
 #include <linux/sensors.h>
 #include <linux/regulator/consumer.h>
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_P839v55_COMMON)
 #include <linux/wakelock.h>
 #endif
 
@@ -85,7 +85,7 @@ struct ltr559_data {
 
 	struct delayed_work ps_work;
 	struct delayed_work als_work;
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_p839v55_COMMON)
 	struct wake_lock ltr559_ps_wakelock;
 #endif
 
@@ -96,7 +96,7 @@ struct ltr559_data {
 
 	u32 ps_state;
 	u32 last_lux;
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_p839v55_COMMON)
 	bool cali_update;
 	u32 dynamic_noise;
 #endif
@@ -137,7 +137,7 @@ static int ltr559_ps_set_enable(struct sensors_classdev *sensors_cdev,
 		unsigned int enable);
 
 
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_p839v55_COMMON)
 static ssize_t ltr559_ps_dynamic_caliberate(struct sensors_classdev *sensors_cdev);			
 #endif
 
@@ -166,7 +166,7 @@ static  struct ltr559_reg reg_tbl[] = {
 				.defval = 0x00,
 				.curval = 0x01,
 		},
-#if defined(CONFIG_PICCOLO_COMMON) //increase the transmission of power for piccolo
+#if defined(CONFIG_p839v55_COMMON) //increase the transmission of power for p839v55
 		{
 				.name = "PS_LED",
 				.addr = 0x82,
@@ -199,7 +199,7 @@ static  struct ltr559_reg reg_tbl[] = {
 				.defval = 0x02,
 				.curval = 0x00,
 		},
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_p839v55_COMMON)
 		{
 				.name = "ALS_MEAS_RATE",
 				.addr = 0x85,
@@ -311,7 +311,7 @@ static struct sensors_classdev sensors_proximity_cdev = {
 	.sensors_poll_delay = NULL,
 };
 
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_p839v55_COMMON)
 static int ltr559_ps_read(struct i2c_client *client)
 {
 	int psval_lo, psval_hi, psdata;
@@ -390,7 +390,7 @@ static int ltr559_ps_enable(struct i2c_client *client, int on)
 			input_sync(data->input_dev_ps);
 		}
 
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_p839v55_COMMON)
 		ltr559_ps_dynamic_caliberate(&data->ps_cdev);
 #endif
 	} else {
@@ -536,7 +536,7 @@ static void ltr559_ps_work_func(struct work_struct *work)
 		} else if (psdata <= data->platform_data->prox_hsyteresis_threshold){
 			data->ps_state = 1; //far
 			
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_p839v55_COMMON)
 			   if (data->dynamic_noise > 20 && psdata < (data->dynamic_noise - 50) ) {
 				  data->dynamic_noise = psdata;
 				  if(psdata < 100) {
@@ -937,7 +937,7 @@ static int ltr559_als_poll_delay(struct sensors_classdev *sensors_cdev,
 	return 0;
 }
 
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_p839v55_COMMON)
 static ssize_t ltr559_ps_dynamic_caliberate(struct sensors_classdev *sensors_cdev)			
 {
 	struct ltr559_data *data = container_of(sensors_cdev, struct ltr559_data, ps_cdev);
@@ -1062,7 +1062,7 @@ static int ltr559_ps_set_enable(struct sensors_classdev *sensors_cdev,
 		}
 	}
 
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_p839v55_COMMON)
 	if (enable == 1) {
 		wake_lock(&data->ltr559_ps_wakelock);
 		irq_set_irq_wake(data->irq, 1);
@@ -1487,7 +1487,7 @@ int ltr559_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		goto exit_power_off;
 	}
 
-	#if defined(CONFIG_PICCOLO_COMMON)
+	#if defined(CONFIG_p839v55_COMMON)
 	i2c_smbus_write_byte_data(client, LTR559_PS_MEAS_RATE, 0x08);
 	#endif
 	/* request gpio and irq */
@@ -1589,7 +1589,7 @@ int ltr559_probe(struct i2c_client *client, const struct i2c_device_id *id)
 		goto exit_unregister_als_class;
 	}
 	double_tap_data = data;
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_p839v55_COMMON)
 	wake_lock_init(&data->ltr559_ps_wakelock, WAKE_LOCK_SUSPEND, "ltr559-ps-wakelock");
 #endif
 //set enable to trigger calibration at boot
@@ -1653,7 +1653,7 @@ static int ltr559_remove(struct i2c_client *client)
 	input_free_device(data->input_dev_als);
 	input_free_device(data->input_dev_ps);
 
-#if defined(CONFIG_PICCOLO_COMMON)
+#if defined(CONFIG_p839v55_COMMON)
 	wake_lock_destroy(&data->ltr559_ps_wakelock);
 #endif
 	ltr559_gpio_irq_free(data);

@@ -78,12 +78,9 @@ dtb-$(CONFIG_ARCH_MSM8909) += msm8909-sim.dtb \
 	apq8009-mtp-wcd9326-refboard.dtb \
 	apq8009-512mb-mtp-wcd9326-refboard.dtb
 
-ifeq ($(CONFIG_PICCOLO_COMMON),y)
-dtb-$(CONFIG_ARCH_MSM8916) +=  piccolo-msm8939-qrd-skuk.dtb
-else ifeq ($(CONFIG_PICMT_COMMON),y)
-dtb-$(CONFIG_ARCH_MSM8916) +=  picmt-msm8916-qrd-skui.dtb
-else ifeq ($(CONFIG_VEGETALTE_COMMON),y)
-dtb-$(CONFIG_ARCH_MSM8916) +=  vegetalte-msm8916-qrd-skui.dtb
+ifeq ($(CONFIG_p839v55_COMMON),y)
+dtb-$(CONFIG_ARCH_MSM8916) +=  p839v55-msm8939-qrd-skuk.dtb
+
 else
 dtb-$(CONFIG_ARCH_MSM8916) += msm8916-cdp.dtb \
 	msm8916-cdp-smb1360.dtb \

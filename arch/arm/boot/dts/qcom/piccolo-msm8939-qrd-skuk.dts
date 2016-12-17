@@ -12,16 +12,16 @@
 
 /dts-v1/;
 
-#include "piccolo/piccolo-msm8939.dtsi"
-#include "piccolo/piccolo-msm8939-qrd-skuk.dtsi"
-#include "piccolo/dsi-panel-trulynt35695-1080p-video.dtsi"
-#include "piccolo/piccolo-msm8939-camera-sensor-qrd.dtsi"
-#include "piccolo/dsi-panel-trulynt35695-1080p-cmd.dtsi"
-#include "piccolo/dsi-panel-tianma-otm1902a-1080p-cmd.dtsi"
-#include "piccolo/dsi-panel-yushunnt35695-1080p-cmd.dtsi"
+#include "p839v55/p839v55-msm8939.dtsi"
+#include "p839v55/p839v55-msm8939-qrd-skuk.dtsi"
+#include "p839v55/dsi-panel-trulynt35695-1080p-video.dtsi"
+#include "p839v55/p839v55-msm8939-camera-sensor-qrd.dtsi"
+#include "p839v55/dsi-panel-trulynt35695-1080p-cmd.dtsi"
+#include "p839v55/dsi-panel-tianma-otm1902a-1080p-cmd.dtsi"
+#include "p839v55/dsi-panel-yushunnt35695-1080p-cmd.dtsi"
 
 / {
-	model = "Qualcomm Technologies, Inc. MSM8939 QRD SKUK PICCOLO";
+	model = "Qualcomm Technologies, Inc. MSM8939 QRD SKUK p839v55";
 	compatible = "qcom,msm8939-qrd-skuk", "qcom,msm8939-qrd", "qcom,msm8939", "qcom,qrd";
 	qcom,board-id = <0x1000b 5>, <0x2000b 5>;
 };

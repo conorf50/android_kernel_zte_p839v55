@@ -10,7 +10,7 @@
  * GNU General Public License for more details.
  */
 
-#include "piccolo-msm8939-pinctrl.dtsi"
+#include "p839v55-msm8939-pinctrl.dtsi"
 
 &blsp1_uart1 {
 	status = "disabled";

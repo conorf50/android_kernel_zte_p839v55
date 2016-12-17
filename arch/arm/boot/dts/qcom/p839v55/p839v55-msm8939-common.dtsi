@@ -1791,8 +1791,8 @@
 };
 
 #include "../msm-pm8916-rpm-regulator.dtsi"
-#include "piccolo-msm-pm8916.dtsi"
-#include "piccolo-msm8939-regulator.dtsi"
+#include "p839v55-msm-pm8916.dtsi"
+#include "p839v55-msm8939-regulator.dtsi"
 
 &pm8916_vadc {
 	chan@0 {
